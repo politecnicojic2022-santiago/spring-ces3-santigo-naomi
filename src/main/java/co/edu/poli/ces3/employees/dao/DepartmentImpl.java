@@ -23,17 +23,17 @@ public class DepartmentImpl implements DepartmentDao{
 
     @Override
     public Department getDepartment(int id) {
-        return null;
+        return entityManager.find(Department.class, id);
     }
 
     @Override
     public Department createDepartment(Department department) {
-        return null;
+        return entityManager.merge(department);
     }
 
     @Override
-    public Department updateDepartment(Department department) {
-        return null;
+    public Department updateDepartment(int id, Department department) {
+        return ;
     }
 
     @Override
