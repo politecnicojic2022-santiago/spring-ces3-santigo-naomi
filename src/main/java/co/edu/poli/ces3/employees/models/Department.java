@@ -1,7 +1,10 @@
 package co.edu.poli.ces3.employees.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,18 +20,23 @@ public class Department {
     private int id;
     @Column(name = "name")
     private String name;
-    @CreationTimestamp
-    @Column(name = "created_on")
+    @CreatedDate
+    @Column(name = "created_on", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdOn;
-    @UpdateTimestamp
+    @LastModifiedDate
     @Column(name = "updated_on", insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedOn;
-    @OneToMany(mappedBy="bank")
-    private List<Employee> employees;
 
     public Department() {
+    }
+
+    public Department(int id, String name, Date createdOn, Date updatedOn) {
+        this.id = id;
+        this.name = name;
+        this.createdOn = createdOn;
+        this.updatedOn = updatedOn;
     }
 
     public int getId() {
@@ -63,21 +71,5 @@ public class Department {
         this.updatedOn = updatedOn;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public void addEmployees(Employee employee) {
-        this.employees.add(employee);
-        employee.setDomain(this);
-    }
-
-    public void removeEmployees(Employee employee) {
-        this.employees.remove(employee);
-        employee.setDomain(null);
-    }
 }

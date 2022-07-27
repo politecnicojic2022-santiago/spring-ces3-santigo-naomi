@@ -2,6 +2,8 @@ package co.edu.poli.ces3.employees.models;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -20,12 +22,12 @@ public class Employee {
     private String lastName;
     @Column(name = "mail", unique = true)
     private String mail;
-    @CreationTimestamp
-    @Column(name = "created_on")
+    @CreatedDate
+    @Column(name = "created_on", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdOn;
-    @UpdateTimestamp
-    @Column(name = "updated_on")
+    @LastModifiedDate
+    @Column(name = "updated_on", insertable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedOn;
 
@@ -93,11 +95,11 @@ public class Employee {
         this.updatedOn = updatedOn;
     }
 
-    public Department getDomain() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDomain(Department department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 }
