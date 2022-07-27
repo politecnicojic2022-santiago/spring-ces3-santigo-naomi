@@ -42,6 +42,6 @@ public class EmployeesController {
 
     @RequestMapping(value = "api/employee/{id}", method = RequestMethod.DELETE)
     public Employee deleteEmployees(@PathVariable("id") int id){
-        return employeesDao.deleteEmployeee(id);
+        return employeesDao.deleteEmployee(id);
     }
 }

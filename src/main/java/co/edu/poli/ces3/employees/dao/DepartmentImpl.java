@@ -33,11 +33,14 @@ public class DepartmentImpl implements DepartmentDao{
 
     @Override
     public Department updateDepartment(int id, Department department) {
-        return ;
+        department.setId(id);
+        return entityManager.merge(department);
     }
 
     @Override
     public Department deleteDepartment(int id) {
-        return null;
+        Department d = entityManager.find(Department.class, id);
+        entityManager.remove(d);
+        return d;
     }
 }
