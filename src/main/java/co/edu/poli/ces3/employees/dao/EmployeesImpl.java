@@ -38,7 +38,7 @@ public class EmployeesImpl implements EmployeesDao{
     }
 
     @Override
-    public Employee deleteEmployeee(int id) {
+    public Employee deleteEmployee(int id) {
         Employee e = entityManager.find(Employee.class, id);
         entityManager.remove(e);
         return e;
